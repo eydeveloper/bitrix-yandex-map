@@ -11,6 +11,8 @@ use CIBlockElement;
 class OfficeSeeder
 {
     /**
+     * Метод заполняет элементами инфоблок «Офисы».
+     *
      * @return void
      * @throws ArgumentException
      * @throws ObjectPropertyException

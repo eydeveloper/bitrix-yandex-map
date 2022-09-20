@@ -2,7 +2,7 @@
 
 namespace App\Components;
 
-use App\Model\Iblock\Office\OfficeRepository;
+use Bitrix\Iblock\Elements\ElementOfficesTable;
 use Bitrix\Main\Engine\Contract\Controllerable;
 use CBitrixComponent;
 
@@ -31,8 +31,19 @@ class YandexMapComponent extends CBitrixComponent implements Controllerable
      */
     public function getOfficesAction(): array
     {
+        $offices = ElementOfficesTable::query()
+            ->setSelect([
+                'ID',
+                'NAME',
+                'PHONE_' => 'PHONE',
+                'EMAIL_' => 'EMAIL',
+                'COORDINATES_' => 'COORDINATES',
+                'CITY_' => 'CITY',
+            ])
+            ->fetchAll();
+
         return [
-            'offices' => (new OfficeRepository())->getForMap(),
+            'offices' => $offices,
         ];
     }
 

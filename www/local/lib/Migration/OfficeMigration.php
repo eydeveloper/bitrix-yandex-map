@@ -9,6 +9,11 @@ use Exception;
 
 class OfficeMigration
 {
+    /**
+     * Метод создает тип инфоблока «Контент» и инфоблок «Офисы».
+     *
+     * @return void
+     */
     public function run(): void
     {
         (new CIBlockType())->Add([
