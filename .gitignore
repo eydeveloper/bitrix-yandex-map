@@ -1,0 +1,13 @@
+composer.phar
+/vendor/
+
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+
+/.bx_temp/
+/.cache/
+/.config/
+/.local/
+/.pki/
