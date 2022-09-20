@@ -10,15 +10,19 @@ use Bitrix\Main\SystemException;
 class IblockHelper
 {
     /**
+     * Метод возвращает идентификатор инфоблока по символьному коду.
+     *
+     * @param string $code
+     * @return int
+     * @throws ArgumentException
      * @throws ObjectPropertyException
      * @throws SystemException
-     * @throws ArgumentException
      */
-    public static function getIblockId(string $iblockCode): int
+    public static function getIdByCode(string $code): int
     {
         return IblockTable::query()
             ->addSelect('ID')
-            ->addFilter('CODE', $iblockCode)
+            ->addFilter('CODE', $code)
             ->fetch()['ID'];
     }
 }

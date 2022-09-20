@@ -17,7 +17,7 @@ class IblockRepository
      */
     protected function getEntityDataClass(): string
     {
-        $iblockId = IblockHelper::getIblockId($this->iblockCode);
+        $iblockId = IblockHelper::getIdByCode($this->iblockCode);
 
         return Iblock::wakeUp($iblockId)->getEntityDataClass();
     }

@@ -12,6 +12,9 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 
 class YandexMapComponent extends CBitrixComponent implements Controllerable
 {
+    /**
+     * @return \array[][]
+     */
     public function configureActions(): array
     {
         return [
@@ -21,6 +24,11 @@ class YandexMapComponent extends CBitrixComponent implements Controllerable
         ];
     }
 
+    /**
+     * Метод возвращает массив со списком офисов.
+     *
+     * @return array
+     */
     public function getOfficesAction(): array
     {
         return [
@@ -28,6 +36,9 @@ class YandexMapComponent extends CBitrixComponent implements Controllerable
         ];
     }
 
+    /**
+     * @return void
+     */
     public function executeComponent(): void
     {
         $this->includeComponentTemplate();

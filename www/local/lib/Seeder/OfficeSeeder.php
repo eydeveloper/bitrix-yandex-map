@@ -11,13 +11,14 @@ use CIBlockElement;
 class OfficeSeeder
 {
     /**
+     * @return void
+     * @throws ArgumentException
      * @throws ObjectPropertyException
      * @throws SystemException
-     * @throws ArgumentException
      */
     public function run(): void
     {
-        $iblockId = IblockHelper::getIblockId(IBLOCK_OFFICES_CODE);
+        $iblockId = IblockHelper::getIdByCode(IBLOCK_OFFICES_CODE);
 
         $offices = [
             [
