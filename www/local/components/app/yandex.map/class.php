@@ -3,6 +3,7 @@
 namespace App\Components;
 
 use Bitrix\Iblock\Elements\ElementOfficesTable;
+use Bitrix\Main\Data\Cache;
 use Bitrix\Main\Engine\Contract\Controllerable;
 use CBitrixComponent;
 
@@ -31,16 +32,24 @@ class YandexMapComponent extends CBitrixComponent implements Controllerable
      */
     public function getOfficesAction(): array
     {
-        $offices = ElementOfficesTable::query()
-            ->setSelect([
-                'ID',
-                'NAME',
-                'PHONE_' => 'PHONE',
-                'EMAIL_' => 'EMAIL',
-                'COORDINATES_' => 'COORDINATES',
-                'CITY_' => 'CITY',
-            ])
-            ->fetchAll();
+        $cache = Cache::createInstance();
+        $offices = [];
+
+        if ($cache->initCache(7200, 'yandex.map.offices')) {
+            $offices = $cache->getVars();
+        } elseif ($cache->startDataCache()) {
+            $offices = ElementOfficesTable::query()
+                ->setSelect([
+                    'ID',
+                    'NAME',
+                    'PHONE_' => 'PHONE',
+                    'EMAIL_' => 'EMAIL',
+                    'COORDINATES_' => 'COORDINATES',
+                    'CITY_' => 'CITY',
+                ])
+                ->fetchAll();
+            $cache->endDataCache($offices);
+        }
 
         return [
             'offices' => $offices,
